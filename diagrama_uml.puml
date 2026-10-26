@@ -1,0 +1,52 @@
+
+@startuml
+
+title Guardians of the Ancient Kingdom
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+abstract class Personaje {
+    - nombre: str
+    - vida: int
+    - ataque: int
+    - defensa: int
+
+    + recibir_danio(cantidad: int): int
+    + esta_vivo(): bool
+    + mostrar_estado(): void
+    {abstract} + atacar(objetivo: Personaje): int
+}
+
+class Guerrero {
+    + atacar(objetivo: Personaje): int
+}
+
+class Mago {
+    + atacar(objetivo: Personaje): int
+}
+
+class Arquero {
+    + atacar(objetivo: Personaje): int
+}
+
+class Combate {
+    - personaje1: Personaje
+    - personaje2: Personaje
+    - turno_actual: Personaje
+    - rondas: int
+    - ganador: Personaje
+    - empate: bool
+
+    + iniciar(): Personaje
+    + cambiar_turno(): void
+    + verificar_ganador(): Personaje
+    + mostrar_resultado(): void
+}
+
+Personaje <|-- Guerrero
+Personaje <|-- Mago
+Personaje <|-- Arquero
+
+Combate o-- "2" Personaje : participantes
+
+@enduml
